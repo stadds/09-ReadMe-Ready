@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const api = {
-  getUser(username) {
+  async getUser(username) {
 
     const querlURL = `https://api.github.com/users/${username}`;
     
@@ -23,4 +23,4 @@ const api = {
   }
 };
 
-module.exports = api;
+module.exports = {api:api};

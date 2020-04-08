@@ -8,6 +8,7 @@ const inquirer = require("inquirer");
 
 // questions name
 // ==========================================================
+const GITUSER = "github";
 const TITLE = "title";
 const DESC = "description";
 const INSTALL = "installation";
@@ -54,24 +55,45 @@ const questions = [
         message: "Would you like people to contribute to your project?",
         name: CONTRIBUTE,
         choices: [
-            "Yes",
-            "No"
+            "Yes - and we will follow the Contributor Covenant Guidelines",
+            "Yes - they can cotact me",
+            "No- not at this time."
         ]
     },
 
 ];
 
+const gihubUser = [
+    {
+        type:"input",
+        message: "What is your GitHub username?",
+        name: GITUSER
+    }
+];
+
+async function getUserInput(){
+    try{
+        const user = await inquirer.prompt(gihubUser);
+        console.log(user);
+
+        const userQuestions = await inquirer.prompt(questions);
+
+       // console.log(user);
+        console.log(userQuestions);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+
 function writeToFile(fileName, data) {
 }
 
 function init() {
-
-    inquirer
-        .prompt(questions)
-        .then(function(data){
-            console.log(data);
-        })
-   
+    getUserInput();
 }
+
+
 
 init();
