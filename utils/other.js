@@ -70,5 +70,4 @@ const getLicense = (choice) => {
     return licenses[choice];
 }
 
-
 module.exports = { bades: badges, contributeGuides: contributeGuides, licenses: licenses, getLicense: getLicense }

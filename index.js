@@ -66,27 +66,42 @@ const questions = [
 
 const gihubUser = [
     {
-        type:"input",
+        type: "input",
         message: "What is your GitHub username?",
         name: GITUSER
     }
 ];
 
-async function getUserInput(){
-    try{
+async function getUserInput() {
+    try {
+
+        //get github username
         const user = await inquirer.prompt(gihubUser);
         console.log(user[GITUSER]);
 
+        //call github api, get login and avatar url
         const test = await api.api.getUser(user[GITUSER]);
         console.log(test);
 
+        //get the project information
         const userQuestions = await inquirer.prompt(questions);
-        
         console.log(userQuestions);
+
+        console.log(otherData.getLicense(userQuestions[LICENSE]));
+        console.log(markdownInstall(userQuestions[INSTALL]));
     }
-    catch(err){
+    catch (err) {
         console.log(err);
     }
+}
+
+function markdownInstall(strSteps) {
+    let installArr = strSteps.split(", ");
+    let markdownInstall = "";
+    for(let i = 0; i < installArr.length;i++){
+        markdownInstall += `* ${i+1}. ${installArr[i]}.\n`;
+    }
+    return markdownInstall;
 }
 
 
