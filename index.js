@@ -7,6 +7,10 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const otherData = require("./utils/other.js");
 
+
+//console.log(process.env.api_key);
+
+
 // questions name
 // ==========================================================
 const GITUSER = "github";
@@ -96,7 +100,7 @@ async function getUserInput() {
 }
 
 function markdownInstall(strSteps) {
-    let installArr = strSteps.split(", ");
+    let installArr = strSteps.split(",");
     let markdownInstall = "";
     for(let i = 0; i < installArr.length;i++){
         markdownInstall += `* ${i+1}. ${installArr[i]}.\n`;
