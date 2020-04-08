@@ -5,6 +5,7 @@ const markdown = require("./utils/generateMarkdown.js");
 const fs = require("fs");
 //const axios = require("axios");
 const inquirer = require("inquirer");
+const otherData = require("./utils/other.js");
 
 // questions name
 // ==========================================================
@@ -74,11 +75,13 @@ const gihubUser = [
 async function getUserInput(){
     try{
         const user = await inquirer.prompt(gihubUser);
-        console.log(user);
+        console.log(user[GITUSER]);
+
+        const test = await api.api.getUser(user[GITUSER]);
+        console.log(test);
 
         const userQuestions = await inquirer.prompt(questions);
-
-       // console.log(user);
+        
         console.log(userQuestions);
     }
     catch(err){

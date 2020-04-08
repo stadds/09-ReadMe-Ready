@@ -3,24 +3,22 @@ const axios = require("axios");
 const api = {
   async getUser(username) {
 
-    const querlURL = `https://api.github.com/users/${username}`;
-    
-    axios
-      .get(querlURL)
-      .then(function(response){
+    try {
 
-        console.log(response.data);
+      const queryURL = `https://api.github.com/users/${username}`;
 
-        const {login,avatar_url} = response.data;
+      const { data } = await axios.get(queryURL);
+      const { login, avatar_url } = data;
 
-        console.log(login);
-        console.log(avatar_url);
-    
-        return {login,avatar_url};
+      console.log(login);
+      console.log(avatar_url);
 
-      })
-
+      return { login, avatar_url };
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 };
 
-module.exports = {api:api};
+module.exports = { api };
