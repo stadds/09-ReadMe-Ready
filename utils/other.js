@@ -52,6 +52,8 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.`,
 
+"No License": "TBD"
+
 };
 
 
@@ -70,4 +72,14 @@ const getLicense = (choice) => {
     return licenses[choice];
 }
 
-module.exports = { bades: badges, contributeGuides: contributeGuides, licenses: licenses, getLicense: getLicense }
+const getContributing = (choice) => {
+    return contributeGuides[choice];
+}
+
+module.exports = { 
+    bades: badges, 
+    contributeGuides: contributeGuides, 
+    licenses: licenses, 
+    getLicense: getLicense,  
+    getContributing:getContributing
+}

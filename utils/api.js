@@ -14,13 +14,14 @@ const api = {
       })
 
       console.log(data);
-      const { login, avatar_url,email } = data;
+      const { login, avatar_url,name,email } = data;
 
       console.log(login);
       console.log(avatar_url);
+      console.log(name);
       console.log(email);
 
-      return { login, avatar_url,email } ;
+      return { login, avatar_url,name,email } ;
     }
     catch (err) {
       console.log(err);
