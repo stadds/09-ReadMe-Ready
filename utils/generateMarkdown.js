@@ -8,13 +8,13 @@ ${data.description}
 
 ## Table of Contents
 
-[Installation](#installation)
-[Usage](#usage)
-[License](#license)
-[Badges](#badges)
-[Contributing](#contributing)
-[Tests](#tests)
-[Questions](#questions)
+[Installation](#installation) \n
+[Usage](#usage) \n
+[License](#license) \n
+[Badges](#badges) \n
+[Contributing](#contributing) \n
+[Tests](#tests) \n
+[Questions](#questions) \n
 
 ---
 ## Installation

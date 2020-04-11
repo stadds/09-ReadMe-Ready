@@ -7,13 +7,20 @@ AS A developer I WANT a README generator SO THAT I can easily put together a goo
 
 ## Table of Contents
 
-[Installation](#installation)
-[Usage](#usage)
-[License](#license)
-[Badges](#badges)
-[Contributing](#contributing)
-[Tests](#tests)
-[Questions](#questions)
+[Installation](#installation) 
+
+[Usage](#usage) 
+
+[License](#license) 
+
+[Badges](#badges) 
+
+[Contributing](#contributing) 
+
+[Tests](#tests) 
+
+[Questions](#questions) 
+
 
 ---
 ## Installation
@@ -23,7 +30,7 @@ AS A developer I WANT a README generator SO THAT I can easily put together a goo
 
 ---
 ## Usage
-1. Run the program buy doing "node index.js"
+1. Run the program by doing "node index.js"
 2. Answer the prompts
 
 ---
@@ -56,7 +63,7 @@ TBD
 1. What happens if I don't have a github repo yet for this project?
    * the badges will not generate correctly. But everything else will work
 2. What happens if I mis-spell something?
-  * Potentially the wrong git user will be returned, or nothing will happen.
+   * Potentially the wrong git user will be returned, or nothing will happen.
 
 ### Contact Me
 ![](https://avatars3.githubusercontent.com/u/2287010?v=4)
