@@ -1,8 +1,8 @@
 
-# README READY
+# ReadMe Ready
 
 ## Description
-NO
+AS A developer I WANT a README generator SO THAT I can easily put together a good README for a new project
 
 
 ## Table of Contents
@@ -17,15 +17,14 @@ NO
 
 ---
 ## Installation
-NO STEPS
-
-ABSOLUTELY NONE
-
-..fine install node, and run npm install
+1. install node.js
+2. ensure the package.json includes inquirer
+3. run npm install to install all the necessary packages
 
 ---
 ## Usage
-MEEP
+1. Run the program buy doing "node index.js"
+2. Answer the prompts
 
 ---
 ## License
@@ -40,7 +39,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---
 ## Badges
-![GitHub followers](https://img.shields.io/github/followers/stadds?style=social)	![GitHub watchers](https://img.shields.io/github/watchers/stadds/09-readme-ready?style=social)	![GitHub repo size](https://img.shields.io/github/repo-size/stadds/09-readme-ready)	![GitHub issues](https://img.shields.io/github/issues-raw/stadds/09-readme-ready)	
+![GitHub followers](https://img.shields.io/github/followers/stadds?style=social)	![GitHub watchers](https://img.shields.io/github/watchers/stadds/09-readme-ready?style=social)	![GitHub stars](https://img.shields.io/github/stars/stadds/09-readme-ready?style=social)	![GitHub repo size](https://img.shields.io/github/repo-size/stadds/09-readme-ready)	![GitHub issues](https://img.shields.io/github/issues-raw/stadds/09-readme-ready)	
 
 ---
 ## Contributing
@@ -54,7 +53,10 @@ TBD
 
 ---
 ## Questions
-NO QUESTIONS
+1. What happens if I don't have a github repo yet for this project?
+   * the badges will not generate correctly. But everything else will work
+2. What happens if I mis-spell something?
+  * Potentially the wrong git user will be returned, or nothing will happen.
 
 ### Contact Me
 ![](https://avatars3.githubusercontent.com/u/2287010?v=4)
