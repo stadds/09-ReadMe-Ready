@@ -5,7 +5,7 @@ function generateMarkdown(data) {
 ## Description
 ${data.description}
 
----
+
 ## Table of Contents
 
 [Installation](#installation)
@@ -16,29 +16,38 @@ ${data.description}
 [Tests](#tests)
 [Questions](#questions)
 
-
+---
 ## Installation
 ${data.installation}
 
+---
 ## Usage
 ${data.usage}
 
-
+---
 ## License
 ${data.license}
 
+---
 ## Badges
+${data.badges}
 
-
+---
 ## Contributing
 ${data.contributing}
 
+---
 ## Tests
+${data.tests}
 
-
+---
 ## Questions
-* ![](${data.avatar_url})
-* ${data.email}
+${data.questions}
+
+### Contact Me
+![](${data.avatar_url})
+
+* email:  ${data.email}
 `
 }
 

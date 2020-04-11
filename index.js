@@ -5,7 +5,7 @@ const markdown = require("./utils/generateMarkdown.js");
 const fs = require("fs");
 //const axios = require("axios");
 const inquirer = require("inquirer");
-const otherData = require("./utils/other.js");
+const badgeData = require("./utils/badge.js");
 const util = require("util");
 
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -23,7 +23,9 @@ const USAGE = "usage";
 const LICENSE = "license";
 const CONTRIBUTE = "contributing";
 const TESTS = "tests";
-const QUESTIONS = "questions"
+const GITREPO = "gitrepo";
+const QUESTIONS = "questions";
+const BADGES = "badges";
 
 //for the copyright year in license
 const currentYear = new Date().getFullYear();
@@ -41,13 +43,13 @@ const questions = [
         name: DESC
     },
     {
-        type: "input",
-        message: "What steps are required to install this program? Please use commas to separate each step.",
+        type: "editor",
+        message: "What steps are required to install this program? (SAVE and exit the file when done)",
         name: INSTALL
     },
     {
-        type: "input",
-        message: "Provide instructions or an example on how to use your program.",
+        type: "editor",
+        message: "Provide instructions or an example on how to use your program. (SAVE and exit the file when done)",
         name: USAGE
     },
     {
@@ -75,7 +77,7 @@ const questions = [
         choices: [
             {
                 name: "Yes - and we will follow the Contributor Covenant Guidelines",
-                value: "Contact me if you would like to contribute! Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms."
+                value: "[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)\n\nContact me if you would like to contribute! Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms."
             },
             {
                 name: "Yes - they can cotact me",
@@ -84,6 +86,43 @@ const questions = [
             { name: "No- not at this time.", value: "I am not taking contributors at this time. Thank you!" }
         ]
     },
+    {
+        type: "editor",
+        message: "List some Test Cases (SAVE and exit the file when done)",
+        name: TESTS
+    },
+    {
+        type: "editor",
+        message: "List and answer some frequently asked questions about your project (SAVE and exit the file when done)",
+        name: QUESTIONS
+    },
+    {
+        type: "checkbox",
+        message: "Choose some badges you would like to include in your ReadMe:",
+        name: BADGES,
+        choices: [
+            {
+                value: "git-follow",
+                name: "GitHub Follower Count"
+            },
+            {
+                value: "git-watchers",
+                name: "GitHub Watcher count"
+            },
+            {
+                value:"git-starred",
+                name:"GitHub Starred"
+            },
+            {
+                value: "git-reposize",
+                name: "GitHub Repo size"
+            },
+            {
+                value: "git-openissues",
+                name: "GitHub number of open issues for my repo"
+            }
+        ]
+    }
 
 ];
 
@@ -92,41 +131,47 @@ const gihubUser = [
         type: "input",
         message: "What is your GitHub username?",
         name: GITUSER
+    },
+    {
+        type: "input",
+        message: "What is your GitHub Repo for this ReadMe?",
+        name: GITREPO
     }
 ];
 
 async function getUserInput() {
     try {
 
-        //get github username
+        //get github username and their repo name
         const user = await inquirer.prompt(gihubUser);
         console.log(user[GITUSER]);
+        console.log(user[GITREPO]);
 
-        //call github api, get login and avatar url
+        //call github api, get login and avatar url, and email
         const githubInfo = await api.api.getUser(user[GITUSER]);
         console.log(githubInfo);
-        // userReadMe.name = test.name;
-        // userReadMe.email = test.email;
-        // userReadMe.avatar = test.avatar_url;
+
 
         //get the project information
         const userQuestions = await inquirer.prompt(questions);
         console.log(userQuestions);
 
-        // console.log(otherData.getLicense(userQuestions[LICENSE]));
+        //get the badge markdown based on the user input
+        const newBadgeStr = badgeData.getBadges(user[GITUSER],user[GITREPO],userQuestions[BADGES]);
+        console.log(newBadgeStr);
 
-        //replace commas with newlines in install steps, add numbers
-        userQuestions[INSTALL] = markdownInstall(userQuestions[INSTALL]);
-        console.log(markdownInstall(userQuestions[INSTALL]));
+        //overwrite the badge property of the prompts field with the new badge str containing the new markdown
+        userQuestions[BADGES] = newBadgeStr;
 
-        //console.log(otherData.getContributing(userQuestions[CONTRIBUTE]));
-
+        //create a new object that combines the 2 prompt objects.
         const userReadMe = {...githubInfo,...userQuestions};
         console.log(userReadMe);
 
+        //generate the ReadMe markdown based on the new user object
         const readMeStr = markdown.generateMarkdown(userReadMe);
 
-        await writeFileAsync(`${userReadMe.login}.md`,readMeStr);
+        // save the new markdown str to a file!
+        await writeFileAsync(`${user[GITREPO]}.md`,readMeStr);
 
         console.log("ReadMe created!");
     }
@@ -134,26 +179,6 @@ async function getUserInput() {
         console.log(err);
     }
 }
-
-function markdownInstall(strSteps) {
-    let installArr = strSteps.split(",");
-    let markdownInstall = "";
-    for (let i = 0; i < installArr.length; i++) {
-        markdownInstall += `${i+1}. ${installArr[i]}\n`;
-    }
-    return markdownInstall;
-}
-
-
-// function writeToFile(fileName, data) {
-//     fs.writeFile(`${filename}.md`,data,function(err){
-//         if(err){
-//             return console.log(err)
-//         }
-
-//         console.log("ReadMe created!")
-//     })
-// }
 
 function init() {
     getUserInput();
