@@ -13,13 +13,13 @@ const api = {
         method: 'GET'
       })
 
-      console.log(data);
+      //console.log(data);
       const { login, avatar_url,name,email } = data;
 
-      console.log(login);
-      console.log(avatar_url);
-      console.log(name);
-      console.log(email);
+      // console.log(login);
+      // console.log(avatar_url);
+      // console.log(name);
+      // console.log(email);
 
       return { login, avatar_url,name,email } ;
     }

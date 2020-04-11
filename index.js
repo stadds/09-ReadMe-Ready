@@ -144,34 +144,34 @@ async function getUserInput() {
 
         //get github username and their repo name
         const user = await inquirer.prompt(gihubUser);
-        console.log(user[GITUSER]);
-        console.log(user[GITREPO]);
+       // console.log(user[GITUSER]);
+        //console.log(user[GITREPO]);
 
         //call github api, get login and avatar url, and email
         const githubInfo = await api.api.getUser(user[GITUSER]);
-        console.log(githubInfo);
+       // console.log(githubInfo);
 
 
         //get the project information
         const userQuestions = await inquirer.prompt(questions);
-        console.log(userQuestions);
+        //console.log(userQuestions);
 
         //get the badge markdown based on the user input
         const newBadgeStr = badgeData.getBadges(user[GITUSER],user[GITREPO],userQuestions[BADGES]);
-        console.log(newBadgeStr);
+        //console.log(newBadgeStr);
 
         //overwrite the badge property of the prompts field with the new badge str containing the new markdown
         userQuestions[BADGES] = newBadgeStr;
 
         //create a new object that combines the 2 prompt objects.
         const userReadMe = {...githubInfo,...userQuestions};
-        console.log(userReadMe);
+       // console.log(userReadMe);
 
         //generate the ReadMe markdown based on the new user object
         const readMeStr = markdown.generateMarkdown(userReadMe);
 
         // save the new markdown str to a file!
-        await writeFileAsync(`${user[GITREPO]}.md`,readMeStr);
+        await writeFileAsync(`${userQuestions[TITLE]}.md`,readMeStr);
 
         console.log("ReadMe created!");
     }
